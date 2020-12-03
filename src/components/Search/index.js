@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Context from 'src/Context'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom";
@@ -11,7 +11,7 @@ export const SearchStyled = styled.label`
     border-radius: 10px;
     width: 300px;
     margin: 0 auto;
-    margin-bottom: 100px;
+    margin-bottom: 125px;
     margin-top: 20px;
     .input{
         padding: 12px 25px;
@@ -19,6 +19,7 @@ export const SearchStyled = styled.label`
     input{
         border: 0;
         font-size: 18px;
+        width: 90%;
     }
     .arrow{
         background-color: black;
@@ -35,36 +36,43 @@ export const SearchStyled = styled.label`
         margin-top: 3px;
     }
     @media (min-width: 768px){
-        margin-bottom: 70px;
+        margin-top: 25px;
+        margin-bottom: 65px;
+        width: 500px;
+        grid-template-columns: 90% 10%;
+        input{
+            width: 90%;
+        }
     }
 `
 
 export default function Search() {
-    const [ip, setIp] = useState('')
+    const [address, setAddress] = useState('')
 
     const context = useContext(Context)
     const { infoLocation } = context
 
     const handleChange = evt => {
-        setIp(evt.target.value)
+        setAddress(evt.target.value)
     }
 
     const histoy = useHistory()
     const handleSubmit = evt => {
         evt.preventDefault()
-        histoy.push(`/ip/${ip}`)
-    }
 
-    useEffect(() => {
-        if(infoLocation) setIp(infoLocation.ip)
-    }, [infoLocation])
+        histoy.push(`/address/${address}`)
+    }
 
     if (!infoLocation) return null
     return (
         <form onSubmit={handleSubmit}>
             <SearchStyled>
                 <div className="input">
-                    <input type="text" placeholder="Write a ip" value={ip} onChange={handleChange} />
+                    <input type="text" 
+                        placeholder="Search for any IP address or domain" 
+                        value={address} 
+                        onChange={handleChange} 
+                    />
                 </div>
                 <div className="arrow">
                     <button>

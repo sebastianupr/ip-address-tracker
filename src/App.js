@@ -23,7 +23,7 @@ export default function App() {
         <div className="App">
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/ip/:ip' component={SearchIp}/>
+            <Route path='/address/:address' component={SearchIp}/>
           </Switch>
         </div>
       </Router>

@@ -21,7 +21,7 @@ export const InfoLocationStyled = styled.div`
     }
     box-shadow: 0 0 30px 5px rgba(0,0,0, .2);
     margin: 0 auto;
-    margin-top: -90px;
+    margin-top: -110px;
     margin-bottom: -168px;
     @media (min-width: 768px){
         grid-template-rows: auto;
@@ -29,7 +29,7 @@ export const InfoLocationStyled = styled.div`
         width: 700px;
         padding: 10px 20px;
         margin-top: -58px;
-        margin-bottom: -52px;
+        margin-bottom: -55px;
         text-aling: left !important;
         justify-content: left;
         .border{
@@ -53,7 +53,7 @@ export default function InfoLocationView() {
     const context = useContext(Context)
     const { infoLocation } = context
 
-    if(!infoLocation) return null
+    if(!infoLocation || infoLocation.status === '422') return null
 
     const { ip, location, isp } = infoLocation
     const { city, region, postalCode, country, timezone } = location

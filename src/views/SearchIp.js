@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useCallback, useContext} from 'react'
 import styled from 'styled-components'
 import InfoLocation from 'src/components/InfoLocation'
 import MapView from 'src/components/Map'
 import Header from 'src/components/Header'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import getLocation from 'src/services/getLocation'
+import getLocationByDomain from 'src/services/getLocationByDomain'
 import Context from 'src/Context'
 
 const SearchIpStyled = styled.div`
@@ -20,13 +21,36 @@ export default function SearchIp() {
 
     const { infoLocation, setInfoLocation } = context
 
-    const {ip} = useParams()
+    const {address} = useParams()
+    const history = useHistory()
+
+    const setInfo = useCallback(infoLocation => {
+            if(infoLocation.code === undefined){
+                setInfoLocation(infoLocation)
+            }
+            else{
+                alert(infoLocation.messages)
+                history.push('/')
+            }
+        },[setInfoLocation, history])
 
     useEffect(() => {
-        getLocation(ip)
-            .then(setInfoLocation)
-            .catch(err => alert(`Error`))
-    },[ip, setInfoLocation])
+        // If address is string getByDomain
+        const numbers = [1,2,3,4,5,6,7,8,9,0]
+        let isDomain = true
+
+        numbers.map(num => {
+            if(address.charAt(0) == num) isDomain = false
+        })
+
+        if(isDomain){
+            getLocationByDomain(address).then(setInfo)
+        }
+        else{
+            getLocation(address).then(setInfo)
+        }
+        
+    },[address, setInfoLocation, setInfo])
 
     if(!infoLocation) return null
 

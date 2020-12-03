@@ -40,15 +40,12 @@ export default function SearchIp() {
         let isDomain = true
 
         numbers.map(num => {
-            if(address.charAt(0) == num) isDomain = false
+            if(address.charAt(0) === num) isDomain = false
+            return null
         })
 
-        if(isDomain){
-            getLocationByDomain(address).then(setInfo)
-        }
-        else{
-            getLocation(address).then(setInfo)
-        }
+        if(isDomain) getLocationByDomain(address).then(setInfo)
+        else getLocation(address).then(setInfo)
         
     },[address, setInfoLocation, setInfo])
 

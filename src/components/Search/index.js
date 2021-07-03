@@ -57,10 +57,12 @@ export default function Search() {
     }
 
     const histoy = useHistory()
+
     const handleSubmit = evt => {
         evt.preventDefault()
-
-        histoy.push(`/address/${address}`)
+        if (address.length > 0) {
+            histoy.push(`/address/${address}`)
+        }
     }
 
     if (!infoLocation) return null

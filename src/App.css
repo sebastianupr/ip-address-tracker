@@ -1,8 +1,0 @@
-:root{
-  --dark: hsl(0, 0%, 59%);
-  --very-dark: hsl(0, 0%, 17%);
-}
-.leaflet-container {
-  width: 100%;
-  height: 100%;
-}

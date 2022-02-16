@@ -1,7 +1,22 @@
+:root{
+  --dark: hsl(0, 0%, 59%);
+  --very-dark: hsl(0, 0%, 17%);
+  --white: white;
+  --black: black;
+  --red: #ff1717;
+
+  --md: 768px;
+}
+
 body {
   margin: 0;
   font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px !important;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
 }

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const MapStyled = styled.div`
+export const MapStyled = styled.section`
   width: 100%;
   height: 100%;
   position: absolute;
   z-index: -2;
-  .map {
+
+  > div {
     width: 100%;
     height: 100%;
   }

@@ -4,7 +4,7 @@ import {
   fetchLocationFailed,
 } from './actions';
 import { showLoader, hideLoader } from '../commons/actions';
-import getLocation from './../../../services/getLocation';
+import getLocation from 'services/getLocation';
 
 export const fetchLocationThunk = (searchQuery) => async (dispatch) => {
   try {

@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ArrowRight from '../../atoms/icons/ArrowRight';
+import ArrowRight from 'atoms/icons/ArrowRight';
 
-import useQuery from '../../hooks/useQuery';
+import useQuery from 'hooks/useQuery';
 
-import { searchAddressSchema } from './../../schemas/searchAddressSchema';
-import { fetchLocation } from '../../store/actions/addressTracker/actions';
+import { searchAddressSchema } from 'schemas/searchAddressSchema';
+import { fetchLocation } from 'store/actions/addressTracker/actions';
 
 import { Form, Search, Input, SearchButton, ErrorMessage } from './styles';
 
@@ -29,7 +29,6 @@ export default function SearchComponent() {
   const searchQuery = useQuery().get('search_query');
 
   const searchAddress = (values) => {
-    console.log('values', values);
     history.push(`?search_query=${values.address}`);
   };
 
@@ -54,9 +53,10 @@ export default function SearchComponent() {
             hasError={errors.address && touchedFields.address}
           />
 
-          <SearchButton type="submit">
+          <SearchButton type="submit" aria-label="Search ip or domain">
             <ArrowRight onClick={handleSubmit(searchAddress)} />
           </SearchButton>
+
           {errors.address && touchedFields.address && (
             <ErrorMessage>{errors.address.message}</ErrorMessage>
           )}

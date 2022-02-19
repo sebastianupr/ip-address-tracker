@@ -1,20 +1,20 @@
 import qs from 'qs';
 
-import { isDomain } from '../schemas/validations/ipAndDomainValidation';
+import { isDomain } from 'schemas/validations/ipAndDomainValidation';
 
 import { API_URL, API_KEY } from './config';
 
-export default function getLocation(ipAddress) {
+export default function getLocation(query) {
   const queryPayload = { apiKey: API_KEY };
 
-  if (!isDomain(ipAddress)) {
-    queryPayload.ipAddress = ipAddress;
-  }
-  if (isDomain(ipAddress)) {
-    queryPayload.domain = ipAddress;
+  if (!isDomain(query)) {
+    queryPayload.ipAddress = query;
   }
 
-  const query = qs.stringify(queryPayload, { encode: false });
+  if (isDomain(query)) {
+    queryPayload.domain = query;
+  }
 
-  return fetch(`${API_URL}?${query}`).then((data) => data.json());
+  const queryParams = qs.stringify(queryPayload, { encode: false });
+  return fetch(`${API_URL}?${queryParams}`).then((data) => data.json());
 }

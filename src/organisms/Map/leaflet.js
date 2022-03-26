@@ -1,9 +1,12 @@
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import iconPin from 'assets/Images/icon-location.svg';
-import { titleLayerConfig, MAP_ID } from './config';
+import { MAP_ID, titleLayerConfig } from './config';
 
-const LeafletMap = (lng, lat) => {
+const LeafletMap = (mapRef, lng, lat) => {
   const direction = [lat, lng];
+
+  mapRef.current.innerHTML = `<div id="${MAP_ID}"></div>`;
 
   const map = L.map(MAP_ID).setView(direction, 13);
 
